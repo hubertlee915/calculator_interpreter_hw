@@ -1,4 +1,4 @@
-grammar calculator;
+grammar Calculator;
 
 init : declarations assignments write_statements '.';
 

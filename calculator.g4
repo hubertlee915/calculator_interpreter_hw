@@ -22,8 +22,10 @@ term_rest : ('*' | '/') unary term_rest
 
 unary : '-' unary | factor;
 
-factor : NUM
+factor : '('expression')'
+       | NUM
        | REAL
+       | IDENTIFIER
        ;
 
 TYPE : 'int' | 'float' ;
@@ -35,4 +37,4 @@ IDENTIFIER : LETTER(LETTER | DIGIT)* ;
 NUM : [1-9](DIGIT)* ;
 REAL : (NUM | '0')'.'(DIGIT)* ;
 
-WS : [ \t\n\r]+ -> skip ; //skip whitespace
+WS : [ \t\n\r]+ -> skip ; //skip whitespace and return

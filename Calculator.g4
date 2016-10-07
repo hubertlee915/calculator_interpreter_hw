@@ -1,6 +1,6 @@
 grammar Calculator;
 
-init : declarations assignments write_statements '.';
+init : declarations assignments write_statements '.' ;
 
 declarations : (declaration ';')+ ;
 assignments : (assignment ';')+ ;
@@ -10,31 +10,28 @@ declaration : TYPE IDENTIFIER ;
 assignment : IDENTIFIER '=' expression;
 write_statement : 'write' '(' IDENTIFIER ')';
 
-expression : term expr_rest;
-expr_rest : ('+' | '-') term expr_rest
-     |
-     ;
-
-term : unary term_rest;
-term_rest : ('*' | '/') unary term_rest
-          |
-          ;
-
-unary : '-' unary | factor;
-
-factor : '('expression')'
-       | NUM
-       | REAL
-       | IDENTIFIER
-       ;
+expression : expression op=('*'|'/') expression     #MulDiv
+           | expression op=('+'|'-') expression     #AddSub
+           | NUM                                    #num
+           | REAL                                   #real
+           | IDENTIFIER                             #id
+           | '('expression')'                       #parens
+           ;
 
 TYPE : 'int' | 'float' ;
+IDENTIFIER : ALPHA(ALPHA|DIGIT)* ;
+NUM : [1-9]DIGIT*;
+REAL : ([1-9]DIGIT* | '0')'.'DIGIT*;
 
-LETTER : [a-zA-Z] ;
-DIGIT : [0-9] ;
-IDENTIFIER : LETTER(LETTER | DIGIT)* ;
+fragment
+ALPHA : [a-zA-Z];
 
-NUM : [1-9](DIGIT)* ;
-REAL : (NUM | '0')'.'(DIGIT)* ;
+fragment
+DIGIT : [0-9];
 
 WS : [ \t\n\r]+ -> skip ; //skip whitespace and return
+
+MUL : '*' ;
+DIV : '/' ;
+ADD : '+' ;
+SUB : '-' ;

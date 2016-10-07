@@ -53,39 +53,45 @@ public interface CalculatorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWrite_statement(CalculatorParser.Write_statementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#expression}.
+	 * Visit a parse tree produced by the {@code parens}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(CalculatorParser.ExpressionContext ctx);
+	T visitParens(CalculatorParser.ParensContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#expr_rest}.
+	 * Visit a parse tree produced by the {@code MulDiv}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpr_rest(CalculatorParser.Expr_restContext ctx);
+	T visitMulDiv(CalculatorParser.MulDivContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#term}.
+	 * Visit a parse tree produced by the {@code AddSub}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTerm(CalculatorParser.TermContext ctx);
+	T visitAddSub(CalculatorParser.AddSubContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#term_rest}.
+	 * Visit a parse tree produced by the {@code num}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTerm_rest(CalculatorParser.Term_restContext ctx);
+	T visitNum(CalculatorParser.NumContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#unary}.
+	 * Visit a parse tree produced by the {@code real}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnary(CalculatorParser.UnaryContext ctx);
+	T visitReal(CalculatorParser.RealContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CalculatorParser#factor}.
+	 * Visit a parse tree produced by the {@code id}
+	 * labeled alternative in {@link CalculatorParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFactor(CalculatorParser.FactorContext ctx);
+	T visitId(CalculatorParser.IdContext ctx);
 }

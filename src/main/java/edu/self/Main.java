@@ -1,8 +1,10 @@
 package edu.self;
 
 import edu.self.antlr.gen.CalculatorLexer;
+import edu.self.antlr.gen.CalculatorParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,10 +22,9 @@ public class Main {
 
         CommonTokenStream stream = new CommonTokenStream(lexer);
 
+        CalculatorParser parser = new CalculatorParser(stream);
 
-//        CalculatorParser parser = new CalculatorParser(stream);
-//
-//        ParseTree tree = parser.init();
-//        System.out.println(tree.toStringTree(parser));
+        ParseTree tree = parser.init();
+        System.out.println(tree.toStringTree(parser));
     }
 }

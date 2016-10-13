@@ -1,7 +1,7 @@
 package edu.self;
 
-import edu.self.antlr.gen.CalculatorLexer;
-import edu.self.antlr.gen.CalculatorParser;
+import edu.self.antlr.gen.*;
+import edu.self.antlr.gen.CalculatorVisitor;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -25,6 +25,9 @@ public class Main {
         CalculatorParser parser = new CalculatorParser(stream);
 
         ParseTree tree = parser.init();
-        System.out.println(tree.toStringTree(parser));
+
+        CalculatorVisitor visitor = new edu.self.CalculatorVisitor();
+        visitor.visit(tree);
+
     }
 }
